@@ -1,0 +1,53 @@
+﻿
+@model IEnumerable<Fiap.Web.Alunos.Models.AgendamentoModel>
+
+<h1>Agendamentos</h1>
+<p>
+    <a asp-controller="Agendamento" asp-action="Create">Novo Agendamento</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Endereço</th>
+            <th>Data</th>
+            <th>Cliente</th>
+            <th>Status</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                <label>@item.Id</label>
+            </td>
+            <td>
+                <label>@item.Endereco</label>
+            </td>
+            <td>
+                <label>@item.Data.ToString("dd/MM/yyyy")</label>
+            </td>
+            <td>
+                <label>@item.Cliente</label>
+            </td>
+            <td>
+                <label>@item.StatusColeta</label>
+            </td>
+            <td>
+                <a asp-controller="Agendamento"
+                   asp-action="Edit"
+                   asp-route-id="@item.Id">Editar</a>
+
+                <a asp-controller="Agendamento"
+                   asp-action="Detail"
+                   asp-route-id="@item.Id">Consultar</a>
+
+                <a asp-controller="Agendamento"
+                   asp-action="Delete"
+                   asp-route-id="@item.Id">Excluir</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,43 @@
+﻿@model Fiap.Web.Alunos.Models.AgendamentoModel
+
+<h1>Agendamento</h1>
+
+<h4>Detalhe</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+        <div class="form-group">
+            <label asp-for="Endereco" class="control-label fw-bold"></label>
+            <div class="col-md-10">
+                <span>@Model.Endereco</span>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <label asp-for="Data" class="control-label fw-bold"></label>
+            <div class="col-md-10">
+                <span>@Model.Data</span>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <label asp-for="Cliente" class="control-label fw-bold"></label>
+            <div class="col-md-10">
+                <span>@Model.Cliente</span>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <label asp-for="StatusColeta" class="control-label fw-bold"></label>
+            <div class="col-md-10">
+                <span>@Model.StatusColeta</span>
+            </div>
+        </div>
+        <br />
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>
+
