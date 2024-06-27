@@ -81,10 +81,14 @@ namespace Fiap.Web.Alunos.Controllers
         [HttpPost]
         public IActionResult Edit(AgendamentoModel agendamentoModel)
         {
+            if (ModelState.IsValid)
+            {
             _context.Update(agendamentoModel);
             _context.SaveChanges();
             TempData["mensagemSucesso"] = $"Os dados do agendamento no endereço {agendamentoModel.Endereco} foram alterados com sucesso";
             return RedirectToAction(nameof(Index));
+            }
+            return View(agendamentoModel);
         }
 
         [HttpGet]
