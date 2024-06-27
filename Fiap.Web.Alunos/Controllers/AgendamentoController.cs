@@ -22,10 +22,11 @@ namespace Fiap.Web.Alunos.Controllers
             var agendamentos = _context.Agendamentos.ToList();
             return View(agendamentos);
         }
-
         [HttpGet]
         public IActionResult Create()
         {
+            var agendamentoModel = new AgendamentoModel();
+            ViewData.Model = agendamentoModel;
             return View();
         }
 
@@ -33,10 +34,10 @@ namespace Fiap.Web.Alunos.Controllers
         [HttpPost]
         public IActionResult Create(AgendamentoModel agendamentoModel)
         {
-            /*  _context.Agendamentos.Add(agendamentoModel);
-              _context.SaveChanges();
-              TempData["mensagemSucesso"] = $"O agendamento no endereço {agendamentoModel.Endereco} foi cadastrado com sucesso";
-              return RedirectToAction(nameof(Index));*/
+          /*  _context.Agendamentos.Add(agendamentoModel);
+            _context.SaveChanges();
+            TempData["mensagemSucesso"] = $"O agendamento no endereço {agendamentoModel.Endereco} foi cadastrado com sucesso";
+            return RedirectToAction(nameof(Index));*/
             if (ModelState.IsValid)
             {
                 _context.Agendamentos.Add(agendamentoModel);

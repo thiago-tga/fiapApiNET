@@ -26,8 +26,7 @@ namespace Fiap.Web.Alunos.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(19)")
-                        .HasColumnName("agendamento_id");
+                        .HasColumnType("NUMBER(19)");
 
                     OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 

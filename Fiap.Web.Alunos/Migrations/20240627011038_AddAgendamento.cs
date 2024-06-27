@@ -15,7 +15,7 @@ namespace Fiap.Web.Alunos.Migrations
                 name: "Agendamentos",
                 columns: table => new
                 {
-                    agendamento_id = table.Column<long>(type: "NUMBER(19)", nullable: false)
+                    Id = table.Column<long>(type: "NUMBER(19)", nullable: false)
                         .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
                     Endereco = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
                     Data = table.Column<DateTime>(type: "DATE", nullable: false),
@@ -23,7 +23,7 @@ namespace Fiap.Web.Alunos.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Agendamentos", x => x.agendamento_id);
+                    table.PrimaryKey("PK_Agendamentos", x => x.Id);
                 });
         }
 

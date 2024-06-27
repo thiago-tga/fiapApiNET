@@ -8,7 +8,7 @@ namespace Fiap.Web.Alunos.Models
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("agendamento_id")]
+   
         public long Id { get; set; }
 
         public string Endereco { get; set; }

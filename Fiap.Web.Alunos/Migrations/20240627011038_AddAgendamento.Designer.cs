@@ -12,7 +12,7 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace Fiap.Web.Alunos.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240627001611_AddAgendamento")]
+    [Migration("20240627011038_AddAgendamento")]
     partial class AddAgendamento
     {
         /// <inheritdoc />
@@ -29,8 +29,7 @@ namespace Fiap.Web.Alunos.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(19)")
-                        .HasColumnName("agendamento_id");
+                        .HasColumnType("NUMBER(19)");
 
                     OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
