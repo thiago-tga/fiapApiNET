@@ -26,8 +26,7 @@ namespace Fiap.Web.Alunos.Controllers
         public IActionResult Create()
         {
             var agendamentoModel = new AgendamentoModel();
-            ViewData.Model = agendamentoModel;
-            return View();
+            return View(agendamentoModel);
         }
 
         // Anotação de uso do Verb HTTP Post
