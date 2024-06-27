@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Fiap.Web.Alunos.Controllers
 {
-    public class AgendamentoController : Controller
+    public class AgendamentoController : Controller             
     {
         private readonly DatabaseContext _context;
 
