@@ -26,8 +26,7 @@ namespace Fiap.Web.Alunos.Controllers
         public IActionResult Create()
         {
             var agendamentoModel = new AgendamentoModel();
-            ViewData.Model = agendamentoModel;
-            return View();
+            return View(agendamentoModel);
         }
 
         // Anotação de uso do Verb HTTP Post
@@ -50,7 +49,7 @@ namespace Fiap.Web.Alunos.Controllers
 
         // Anotação de uso do Verb HTTP Get
         [HttpGet]
-        public IActionResult Detail(int id)
+        public IActionResult Detail(long id)
         {
             var agendamento = _context.Agendamentos.FirstOrDefault(a => a.Id == id); // Encontra o agendamento pelo id
 
@@ -66,7 +65,7 @@ namespace Fiap.Web.Alunos.Controllers
 
         // Anotação de uso do Verb HTTP Get
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(long id)
         {
             var agendamento = _context.Agendamentos.Find(id);
             if (agendamento == null)
@@ -82,14 +81,18 @@ namespace Fiap.Web.Alunos.Controllers
         [HttpPost]
         public IActionResult Edit(AgendamentoModel agendamentoModel)
         {
+            if (ModelState.IsValid)
+            {
             _context.Update(agendamentoModel);
             _context.SaveChanges();
             TempData["mensagemSucesso"] = $"Os dados do agendamento no endereço {agendamentoModel.Endereco} foram alterados com sucesso";
             return RedirectToAction(nameof(Index));
+            }
+            return View(agendamentoModel);
         }
 
         [HttpGet]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(long id)
         {
             var agendamento = _context.Agendamentos.Find(id);
             if (agendamento != null)
