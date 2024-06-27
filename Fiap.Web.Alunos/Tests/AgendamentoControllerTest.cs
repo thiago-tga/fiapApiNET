@@ -1,11 +1,12 @@
-using Xunit;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Fiap.Web.Alunos.Controllers;
 using Fiap.Web.Alunos.Data;
 using Fiap.Web.Alunos.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
+using Xunit;
 
 namespace Fiap.Web.Alunos.Tests.Controllers
 
@@ -38,7 +39,7 @@ namespace Fiap.Web.Alunos.Tests.Controllers
 
                 // Assert
                 var viewResult = Assert.IsType<ViewResult>(result);
-                Assert.Equal(200, viewResult.StatusCode ?? 200); // Verifica se o status code é 200
+                Assert.Equal(200, viewResult.StatusCode); // Verifica se o status code é 200
                 var model = Assert.IsAssignableFrom<IEnumerable<AgendamentoModel>>(viewResult.ViewData.Model);
                 Assert.Equal(2, model.Count());
             }
