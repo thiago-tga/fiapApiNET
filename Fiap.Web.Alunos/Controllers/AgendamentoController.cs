@@ -1,10 +1,9 @@
-﻿using Fiap.Web.Alunos.Data.Contexts;
+﻿using Fiap.Web.Alunos.Data;
+
 using Fiap.Web.Alunos.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
 
 namespace Fiap.Web.Alunos.Controllers
 {
@@ -19,6 +18,7 @@ namespace Fiap.Web.Alunos.Controllers
 
         public IActionResult Index()
         {
+            // Carrega todos os agendamentos com os dados necessários
             var agendamentos = _context.Agendamentos.ToList();
             return View(agendamentos);
         }
@@ -26,29 +26,48 @@ namespace Fiap.Web.Alunos.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.StatusColeta = new SelectList(Enum.GetValues(typeof(StatusColeta)));
             return View();
         }
 
+        // Anotação de uso do Verb HTTP Post
         [HttpPost]
-        public IActionResult Create(AgendamentoModel agendamento)
+        public IActionResult Create(AgendamentoModel agendamentoModel)
         {
+            /*  _context.Agendamentos.Add(agendamentoModel);
+              _context.SaveChanges();
+              TempData["mensagemSucesso"] = $"O agendamento no endereço {agendamentoModel.Endereco} foi cadastrado com sucesso";
+              return RedirectToAction(nameof(Index));*/
             if (ModelState.IsValid)
             {
-                _context.Agendamentos.Add(agendamento);
+                _context.Agendamentos.Add(agendamentoModel);
                 _context.SaveChanges();
-                TempData["mensagemSucesso"] = $"O agendamento foi cadastrado com sucesso";
+                TempData["mensagemSucesso"] = $"O agendamento no endereço {agendamentoModel.Endereco} foi cadastrado com sucesso";
                 return RedirectToAction(nameof(Index));
             }
-
-            ViewBag.StatusColeta = new SelectList(Enum.GetValues(typeof(StatusColeta)), agendamento.StatusColeta);
-            return View(agendamento);
+            return View(agendamentoModel);
         }
 
+        // Anotação de uso do Verb HTTP Get
         [HttpGet]
         public IActionResult Detail(int id)
         {
-            var agendamento = _context.Agendamentos.FirstOrDefault(a => a.Id == id);
+            var agendamento = _context.Agendamentos.FirstOrDefault(a => a.Id == id); // Encontra o agendamento pelo id
+
+            if (agendamento == null)
+            {
+                return NotFound(); // Retorna um erro 404 se o agendamento não for encontrado
+            }
+            else
+            {
+                return View(agendamento); // Retorna a view com os dados do agendamento
+            }
+        }
+
+        // Anotação de uso do Verb HTTP Get
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var agendamento = _context.Agendamentos.Find(id);
             if (agendamento == null)
             {
                 return NotFound();
@@ -59,32 +78,13 @@ namespace Fiap.Web.Alunos.Controllers
             }
         }
 
-        [HttpGet]
-        public IActionResult Edit(int id)
-        {
-            var agendamento = _context.Agendamentos.Find(id);
-            if (agendamento == null)
-            {
-                return NotFound();
-            }
-
-            ViewBag.StatusColeta = new SelectList(Enum.GetValues(typeof(StatusColeta)), agendamento.StatusColeta);
-            return View(agendamento);
-        }
-
         [HttpPost]
-        public IActionResult Edit(AgendamentoModel agendamento)
+        public IActionResult Edit(AgendamentoModel agendamentoModel)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Update(agendamento);
-                _context.SaveChanges();
-                TempData["mensagemSucesso"] = $"Os dados do agendamento foram alterados com sucesso";
-                return RedirectToAction(nameof(Index));
-            }
-
-            ViewBag.StatusColeta = new SelectList(Enum.GetValues(typeof(StatusColeta)), agendamento.StatusColeta);
-            return View(agendamento);
+            _context.Update(agendamentoModel);
+            _context.SaveChanges();
+            TempData["mensagemSucesso"] = $"Os dados do agendamento no endereço {agendamentoModel.Endereco} foram alterados com sucesso";
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
@@ -95,11 +95,11 @@ namespace Fiap.Web.Alunos.Controllers
             {
                 _context.Agendamentos.Remove(agendamento);
                 _context.SaveChanges();
-                TempData["mensagemSucesso"] = $"Os dados do agendamento foram removidos com sucesso";
+                TempData["mensagemSucesso"] = $"Os dados do agendamento no endereço {agendamento.Endereco} foram removidos com sucesso";
             }
             else
             {
-                TempData["mensagemSucesso"] = "OPS !!! Agendamento inexistente.";
+                TempData["mensagemErro"] = "OPS !!! Agendamento inexistente.";
             }
             return RedirectToAction(nameof(Index));
         }

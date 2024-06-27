@@ -18,15 +18,8 @@ namespace Fiap.Web.Alunos.Models
         [Required]
         public string Cliente { get; set; }
 
-        [Required]
-        [Column("status")]
-        public StatusColeta StatusColeta { get; set; }
+    
     }
 
-    public enum StatusColeta
-    {
-        Coletado,
-        Agendado
-    }
 
 }

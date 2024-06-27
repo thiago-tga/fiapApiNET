@@ -1,56 +1,38 @@
 ﻿@page
+@model Fiap.Web.Alunos.Models.AgendamentoModel
 
-
-@model Fiap.Web.Alunos.Models.ClienteModel
-
-<h1>Cliente</h1>
+<h1>Editar Agendamento</h1>
 
 <h4>Editar</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <!-- IMPORTANTE elemento form -->
-        <form asp-action="Edit" asp-controller="Cliente">
+        <form asp-action="Edit" asp-controller="Agendamento" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <!-- IMPORTANTE propriedade ClienteId oculto -->
-            <input type="hidden" asp-for="ClienteId" />
+            <!-- Campo oculto para o ID do agendamento -->
+            <input type="hidden" asp-for="Id" />
 
             <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
+                <label asp-for="Endereco" class="control-label"></label>
+                <input asp-for="Endereco" class="form-control" />
+                <span asp-validation-for="Endereco" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Sobrenome" class="control-label"></label>
-                <input asp-for="Sobrenome" class="form-control" />
-                <span asp-validation-for="Sobrenome" class="text-danger"></span>
+                <label asp-for="Data" class="control-label"></label>
+                <input asp-for="Data" class="form-control" type="date" />
+                <span asp-validation-for="Data" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <label asp-for="Cliente" class="control-label"></label>
+                <input asp-for="Cliente" class="form-control" />
+                <span asp-validation-for="Cliente" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DataNascimento" class="control-label"></label>
-                <input asp-for="DataNascimento" class="form-control" />
-                <span asp-validation-for="DataNascimento" class="text-danger"></span>
+             
             </div>
             <div class="form-group">
-                <label asp-for="Observacao" class="control-label"></label>
-                <input asp-for="Observacao" class="form-control" />
-                <span asp-validation-for="Observacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RepresentanteId" class="control-label"></label>
-                <select asp-for="RepresentanteId" asp-items="@ViewBag.Representantes" class="form-select">
-                    <option value="0">Selecione</option>
-                </select>
-                <span asp-validation-for="RepresentanteId" class="text-danger"></span>
-            </div>
-            <br />
-            <div class="form-group">
-                <input type="submit" value="Gravar" class="btn btn-primary" />
+                <button type="submit" class="btn btn-primary">Salvar Alterações</button>
             </div>
         </form>
     </div>

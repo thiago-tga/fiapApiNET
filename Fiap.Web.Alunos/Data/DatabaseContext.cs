@@ -1,9 +1,9 @@
 ﻿using Fiap.Web.Alunos.Models;
-using Fiap.Web.Alunos.Contexts;
+using Microsoft.EntityFrameworkCore;
 
-//ERROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 
-namespace Fiap.Web.Alunos.Contexts
+
+namespace Fiap.Web.Alunos.Data
 {
     public class DatabaseContext : DbContext
     {
@@ -18,7 +18,7 @@ namespace Fiap.Web.Alunos.Contexts
                 entity.Property(a => a.Endereco).IsRequired();
                 entity.Property(a => a.Data).HasColumnType("DATE");
                 entity.Property(a => a.Cliente).IsRequired();
-                entity.Property(a => a.StatusColeta).IsRequired();
+               
             });
         }
 
