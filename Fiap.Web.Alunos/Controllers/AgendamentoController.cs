@@ -4,6 +4,7 @@ using Fiap.Web.Alunos.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using static Fiap.Web.Alunos.Controllers.AgendamentoController;
 
 namespace Fiap.Web.Alunos.Controllers
 {
@@ -107,5 +108,44 @@ namespace Fiap.Web.Alunos.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+   
+    
+        public class AgendamentoPaginacaoViewModel
+        {
+            public IEnumerable<AgendamentoModel> Agendamento { get; set; }
+            public int CurrentPage { get; set; }
+            public int PageSize { get; set; }
+            public bool HasPreviousPage => CurrentPage > 1;
+            public bool HasNextPage => Agendamento.Count() == PageSize;
+            public string PreviousPageUrl => HasPreviousPage ? $"/Cliente?pagina={CurrentPage - 1}&amp;tamanho={PageSize}" : "";
+            public string NextPageUrl => HasNextPage ? $"/Cliente?pagina={CurrentPage + 1}&amp;tamanho={PageSize}" : "";
+        }
+        public class ClientePaginacaoReferenciaViewModel
+        {
+            public IEnumerable<AgendamentoModel> Agendamento { get; set; }
+            public int PageSize { get; set; }
+            public int Ref { get; set; }
+            public int NextRef { get; set; }
+            public string PreviousPageUrl => $"/Cliente?referencia={Ref}&amp;tamanho={PageSize}";
+            public string NextPageUrl => (Ref < NextRef) ? $"/Cliente?referencia={NextRef}&amp;tamanho={PageSize}" : "";
+        }
     }
-}
+  /*  [HttpGet]
+        public ActionResult<IEnumerable<AgendamentoModel>> Get([FromQuery] int pagina = 1, [FromQuery] int tamanho = 10)
+        {
+            var clientes = _context.ListarAgendamento(pagina, tamanho);
+            var viewModelList = _mapper.Map<IEnumerable<AgendamentoViewModel>>(clientes);
+            var viewModel = new AgendamentoPaginacaoViewModel
+            {
+                Agendamento = viewModelList,
+                CurrentPage = pagina,
+                PageSize = tamanho
+            };
+            return Ok(viewModel);
+        }*/
+
+
+
+    }
+
