@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 
 namespace Fiap.Web.Alunos.Tests.AgendamentoControllerTest
 {
@@ -40,7 +41,11 @@ namespace Fiap.Web.Alunos.Tests.AgendamentoControllerTest
 
                 // Assert
                 var viewResult = Assert.IsType<ViewResult>(result);
-                Assert.Equal(200, viewResult.StatusCode); // Verifica se o status code é 200
+                Assert.NotNull(viewResult); // Verifica se o resultado é do tipo ViewResult
+
+                // Verifica se o status code é 200 OK
+                Assert.Equal(StatusCodes.Status200OK, viewResult.StatusCode);
+
                 var model = Assert.IsAssignableFrom<IEnumerable<AgendamentoModel>>(viewResult.ViewData.Model);
                 Assert.Equal(2, model.Count()); // Verifica se há exatamente 2 agendamentos retornados
             }
