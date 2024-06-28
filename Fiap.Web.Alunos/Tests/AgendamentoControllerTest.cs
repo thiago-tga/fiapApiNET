@@ -6,7 +6,7 @@ using Fiap.Web.Alunos.Data;
 using Fiap.Web.Alunos.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Xunit;
+using xunit;
 
 namespace Fiap.Web.Alunos.Tests.Controllers
 
